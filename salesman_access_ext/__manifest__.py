@@ -25,4 +25,5 @@
     'images': ['static/description/icon.png'],
     'installable': True,
     'uninstall_hook': 'uninstall_hook',
+    'license': 'OPL-1',
 }
