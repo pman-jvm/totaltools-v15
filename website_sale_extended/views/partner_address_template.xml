@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="address" inherit_id="website_sale.address" name="Unit Number and Complex Name">
+        <xpath expr="//div[hasclass('form-row')]//div[8]" position="after">
+            <div class="w-100"/>
+            <div t-attf-class="form-group #{error.get('unit_number') and 'o_has_error' or ''} col-lg-12 div_unit_number">
+                <label class="col-form-label label-optional" for="unit_number">Unit Number</label>
+                <input type="text" name="unit_number" t-attf-class="form-control #{error.get('unit_number') and 'is-invalid' or ''}"
+                       t-att-value="'unit_number' in checkout and checkout['unit_number']"/>
+            </div>
+            <div t-attf-class="form-group #{error.get('complex_name') and 'o_has_error' or ''} col-lg-12 div_complex_name">
+                <label class="col-form-label label-optional" for="complex_name">Complex Name</label>
+                <input type="text" name="complex_name" t-attf-class="form-control #{error.get('complex_name') and 'is-invalid' or ''}"
+                       t-att-value="'complex_name' in checkout and checkout['complex_name']"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

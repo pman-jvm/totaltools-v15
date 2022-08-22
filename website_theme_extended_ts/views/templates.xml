@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="short_cart_summary_ts" inherit_id="website_sale.short_cart_summary" name="Short Cart right column : Free delivery" priority="15">
+        <xpath expr="//div[hasclass('card-body')]" position="after">
+            <div class="card-body free_delivery_ts" t-if="website_sale_order.get_free_delivery_total_amount()">
+                <div class="show-free-delivery free-delivery-module_free-delivery-tab_3xNIm">
+                    <div class="free_delivery_img_container_ts">
+                        <img src="/website_theme_extended_ts/static/src/img/delivery_truck.svg" alt="Free Shipping"/>
+                    </div>
+                    <p>Spend
+                        <strong>
+                            <span t-esc="website_sale_order.get_free_delivery_total_amount()" class="monetary_field" style="white-space: nowrap;" t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"/>
+                            or more
+                        </strong>
+                        to get <strong>FREE DELIVERY</strong>.
+                        <span class="free-delivery-module_terms_3uqgf">T&amp;Cs apply</span>
+                    </p>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('js_cart_summary')]" position="inside">
+            <div class="card mt-1">
+                <div class="card-body">
+                    <ul style="list-style: none; margin: 0; padding: 0;">
+                        <li style="padding: 0 0 12px;"><i class="fa fa-lock cart_summary_features " style="padding-left: 4px;"></i> Secure checkout</li>
+                        <li style="padding: 0 0 12px;"><i class="fa fa-credit-card cart_summary_features "></i> Many ways to pay</li>
+                        <li><i class="fa fa-truck cart_summary_features "></i> Fast, reliable delivery</li>
+                    </ul>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="confirmation_ts" inherit_id="website_sale.confirmation" name="Order Confirmation Page" priority="15">
+        <xpath expr="//div[hasclass('oe_website_sale')]" position="replace">
+            <div class="container oe_website_sale py-2">
+                <!-- <h1><span>Order</span> <em t-field="order.name" /> <t t-if="order.state == 'sale'"><span>Confirmed</span></t></h1> -->
+                <div class="row">
+                    <div class="col-12 col-xl">
+                        <div class="oe_cart">
+                            <t t-set="payment_tx_id" t-value="order.get_portal_last_transaction()"/>
+                            <t t-call="website_sale.payment_confirmation_status"/>
+                            <div class="oe_structure card mt-3 text-center" id="confirmation">
+                                <div class="confirmation_icon_ts" style="padding:20px;">
+                                    <img src="/website_theme_extended_ts/static/src/img/order_received.svg" class="img" alt="Order Successful"/>
+                                </div>
+                                <div class="confirmation_main">
+                                    <h2>Thanks, we’ve received your order.</h2>
+                                    <p>
+                                        We’ve sent you email confirmation. Your order number is
+                                        <strong>
+                                            <em t-field="order.name"/>
+                                        </strong>
+                                        .
+                                    </p>
+                                </div>
+                                <div class="confirmation_track_order">
+                                    <a role="button" class="btn btn-primary d-md-inline-block" t-att-href="order.get_portal_url()" target="_blank" aria-label="Track Order" title="Track Order">
+                                        <i class="fa fa-truck"></i>
+                                        Track Order
+                                    </a>
+                                </div>
+                                <div style="padding: 20px;">
+                                    <span class=''>
+                                        <a href="/shop">Continue Shopping</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="oe_structure card mt-3 text-center" id="share_and_win">
+                                <div style="padding:20px;">
+                                    <h3>Share &amp; Stand to Win</h3>
+                                    <p>
+                                        Share your purchase on Facebook or Twitter and you could win its value back in totaltools.co store credit!
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4>To enter:</h4>
+                                    <p style="padding: 0px 10px;">
+                                        Share your purchase on totaltools.co's <span><a href="https://www.facebook.com/SA.TOTALTOOLS/" target="_blank">Facebook</a></span> page
+                                        or on <span><a href="https://twitter.com/ToolsSouth" target="_blank">Twitter</a></span>, tag totaltools.co's page or
+                                        handle and add the hashtag <span class="text-primary">#anythingyoucanimagine</span>.
+                                    </p>
+                                    <p>
+                                        <span><a href="#">T&amp;C's</a></span> apply.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="oe_structure mt-3"/>
+                            <!--<t t-if="payment_tx_id.state == 'done'">
+                                <div class="thanks_msg">
+                                    <h2>Thank you for your order.
+                                        <a role="button" class="btn btn-primary d-none d-md-inline-block" href="/shop/print" target="_blank" aria-label="Print" title="Print">
+                                            <i class="fa fa-print"></i>
+                                            Print
+                                        </a>
+                                    </h2>
+                                </div>
+                            </t>
+                            <t t-if="request.env['res.users']._get_signup_invitation_scope() == 'b2c' and request.website.is_public_user()">
+                                <p class="alert alert-info mt-3" role="status">
+                                    <a role="button" t-att-href='order.partner_id.signup_prepare() and order.partner_id.with_context(relative_url=True).signup_url' class='btn btn-primary'>Sign Up</a>
+                                    to follow your order.
+                                </p>
+                            </t>
+                            <div class="oe_structure clearfix mt-3" id="oe_structure_website_sale_confirmation_1"/>
+                            <h3 class="text-left mt-3">
+                                <strong>Payment Information:</strong>
+                            </h3>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <t t-esc="order.get_portal_last_transaction().acquirer_id.name"/>
+                                        </td>
+                                        <td class="text-right" width="100">
+                                            <strong>Total:</strong>
+                                        </td>
+                                        <td class="text-right" width="100">
+                                            <strong t-field="order.amount_total" t-options="{'widget': 'monetary', 'display_currency': order.pricelist_id.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <t t-call="website_sale.payment_confirmation_status"/>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <t t-set="same_shipping" t-value="bool(order.partner_shipping_id==order.partner_id or only_services)"/>
+                                    <div>
+                                        <b>Billing <t t-if="same_shipping and not only_services">&amp; Shipping</t>:
+                                        </b>
+                                        <span t-esc='order.partner_id' t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')" class="address-inline"/>
+                                    </div>
+                                    <div t-if="not same_shipping and not only_services" groups="sale.group_delivery_invoice_address">
+                                        <b>Shipping:</b>
+                                        <span t-esc='order.partner_shipping_id' t-options="dict(widget='contact', fields=['address'], no_marker=True, separator=', ')" class="address-inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oe_structure mt-3" id="oe_structure_website_sale_confirmation_2"/>-->
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-auto">
+                        <t t-set="website_sale_order" t-value="order"/>
+                        <t t-call="website_sale.cart_summary">
+                            <t t-set="hide_coupon">1</t>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="login" inherit_id="auth_signup.login" name="Sign up - Reset Password">
+        <xpath expr="//div[hasclass('justify-content-between')]" position="replace">
+        </xpath>
+        <xpath expr="//label[@for='password']" position="after">
+            <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" class="float-right">Forgot password?</a>
+        </xpath>
+        <xpath expr="//input[@name='password']" position="after">
+            <div class="justify-content-between mt-2 mb-0 d-flex large">
+                <span style="font-size: 0.95rem;">New to Total Tools?</span>
+                <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}">Create account</a>
+            </div>
+        </xpath>
+        <xpath expr="//form[hasclass('oe_login_form')]" position="inside">
+            <div class="safety">
+                <p class="small mb-2"><strong>Safe Shopping at Total Tools</strong></p>
+                <div class="mb-2">
+                    <img style="cursor:pointer;cursor:hand" src="https://seal.godaddy.com/images/3/en/siteseal_gd_3_h_d_m.gif" alt="SSL site seal" />
+                </div>
+            </div>
+            <div class="clearfix safety_text small">
+                <p>
+                    Rest assured your transaction is safe. This technology safeguards your personal information
+                    and guarantees privacy.
+                </p>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="login_button" inherit_id="web.login" name="Login">
+        <xpath expr="//div[contains(@t-attf-class, 'oe_login_buttons')]" position="attributes">
+            <attribute name="t-attf-class">clearfix oe_login_buttons text-center mb-3</attribute>
+        </xpath>
+    </template>
+</odoo>

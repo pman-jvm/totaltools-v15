@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="1">
+        <record id="restrict_edit_button" model="res.groups">
+            <field name="name">Restrict Edit Button</field>
+        </record>
+
+        <record id="restrict_edit_create_button" model="res.groups">
+            <field name="name">Restrict Create/Edit Button(Customer, Product and Pricelist)</field>
+        </record>
+    </data>
+</odoo>

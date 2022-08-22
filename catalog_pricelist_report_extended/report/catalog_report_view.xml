@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="catalog_pricelist_report.catalog_external_layout">
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+        <div class="header" t-att-style="report_header_style">
+            <div class="o_clean_header">
+                <div class="row mt8">
+                    <div class="col-6">
+                        <t t-if="test['form']['header']">
+                            <t t-if="test['form']['header'] and test['form']['header_address']">
+                                <div name="company_address">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <pre style="font-family: Arial, Helvetica, sans-serif;font-size:16px;"
+                                                 t-esc="test['form']['header_address']"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div name="company_address">
+                                    <ul class="list-unstyled">
+                                        <strong>
+                                            <li>
+                                                <span>ALTIVEN South Africa</span>
+                                            </li>
+                                        </strong>
+                                        <li>
+                                            <span>Unit D2، Northlands Deco Park.</span>
+                                        </li>
+                                        <li>
+                                            <span>Design Blvd, Hoogland, Randburg, 2169, Johannesburg - South Africa
+                                            </span>
+                                        </li>
+                                        <li>Tel:
+                                            <span>087 898 8888</span>
+                                        </li>
+                                        <li>
+                                            <span>sales@altiven.co.za</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                    <div class="col-6 text-right">
+                        <t t-if="test['form']['print_images']">
+                            <t t-if="test['form']['image']">
+                                <div t-if="test['form']['image']" class="col-6 offset-1" style="padding-left:70mm;">
+                                    <img t-att-src="image_data_uri(test['form']['image'])" alt="Logo" height="70px" width="120px"/>
+                                </div>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <img src="/catalog_pricelist_report_extended/static/img/header.jpg" alt="Logo" height="70px"
+                                 width="120px"/>
+                        </t>
+                        <br/><br/>
+                        <span style="vertical-align:middle;font-size:18px;font-weight:bold;"><t t-esc="test['form']['custom_title']"/></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div t-attf-class="footer o_clean_footer" style="border-top:1px solid;">
+            <div class="row mt8">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-right">
+                    <t t-if="test['form']['print_footer_images']">
+                        <t t-if="test['form']['footer_image']">
+                            <div t-if="test['form']['image']" class="col-6 offset-1" style="padding-left:70mm;">
+                                <img t-att-src="image_data_uri(test['form']['footer_image'])" alt="Logo" height="70px" width="120px"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <img src="/catalog_pricelist_report_extended/static/img/footer.jpg" alt="Logo" height="70px"
+                             width="120px"/>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="catalog_pricelist_report.catalog_main_report">
+        <div>
+            <table class="table table-condensed" width="100%">
+                <tbody>
+                    <t t-foreach="data['categories_data']" t-as="categ_data">
+                        <tr style="page-break-inside: avoid;">
+                            <td colspan="100" style="padding:2px;background:#288e28;font-size:13px;">
+                                <strong t-esc="categ_data['category'].name"/>
+                            </td>
+                        </tr>
+                        <tr t-foreach="categ_data['products']" t-as="product">
+                            <!--                            <table class="table table-condensed" border="1" width="100%">-->
+                            <tr style="page-break-inside: avoid;">
+                                <td style="width:30%">
+                                    <div class="card" t-if="test['form']['barcode_print']" style="padding-left:1px;width: 14rem;height:15.4rem">
+                                        <!--                                        <div class="card" style="padding-left:1px;width: 14rem;height:14.2rem">-->
+                                        <div class="card-header" t-if="product.default_code"
+                                             style="padding:0px;font-size: 17px;font-weight:bold;background:#94bade;text-align:center;">
+                                            <span>SKU:<t t-esc="product.default_code"/></span>
+                                        </div>
+                                        <div class="card-body" style="padding-top:0px;overflow:hidden;">
+                                            <t t-if="product.image_512">
+                                                <img t-att-src="image_data_uri(product.image_512)" style="width: 100%; height:70%;"/>
+                                            </t>
+                                        </div>
+                                        <t t-if="test['form']['pricelist_id']">
+                                            <div class="card-footer" t-if="test['form']['pricelist_id']"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>
+                                                    <t t-esc="pricelist_name[:20]"/>
+                                                    <t t-esc="symbol"/>
+                                                    <t t-esc="round(categ_data['prices'][product.id][data['quantities'][0]],2)"/>
+                                                </span>
+                                            </div>
+                                        </t>
+                                        <!--Second Pricelist with barcode Pricelist -->
+                                        <t t-if="test['form']['pricelist2_id']">
+                                            <div class="card-footer" t-if="test['form']['pricelist2_id']"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>
+                                                    <t t-esc="pricelist2_name[:20]"/>
+                                                    <t t-esc="symbol2"/>
+                                                    <t t-esc="round(categ_data['prices2'][product.id][data['quantities'][0]],2)"/>
+                                                </span>
+                                            </div>
+                                        </t>
+                                        <t t-if="not test['form']['pricelist_id'] and not test['form']['pricelist2_id']">
+                                            <div class="card-footer"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>On request or contact us</span>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <div class="card" t-else="" style="padding-left:1px;width: 18rem;height:19.4rem;">
+                                        <!--                                        <div class="card" style="padding-left:1px;width: 14rem;height:14.2rem">-->
+                                        <div class="card-header" t-if="product.default_code"
+                                             style="padding:0px;font-size: 17px;font-weight:bold;background:#94bade;text-align:center;">
+                                            <span>SKU:<t t-esc="product.default_code"/></span>
+                                        </div>
+                                        <div class="card-body" style="overflow:hidden;">
+                                            <t t-if="product.image_512">
+                                                <img t-att-src="image_data_uri(product.image_512)" style="width: 100%; height:70%;"/>
+                                            </t>
+                                        </div>
+                                        <t t-if="test['form']['pricelist_id']">
+                                            <div class="card-footer" t-if="test['form']['pricelist_id']"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>
+                                                    <t t-esc="pricelist_name[:20]"/>
+                                                    <t t-esc="symbol"/>
+                                                    <t t-esc="round(categ_data['prices'][product.id][data['quantities'][0]],2)"/>
+                                                </span>
+                                            </div>
+                                        </t>
+                                        <!--Second Pricelist without barcode Pricelist -->
+                                        <t t-if="test['form']['pricelist2_id']">
+                                            <div class="card-footer" t-if="test['form']['pricelist2_id']"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>
+                                                    <t t-esc="pricelist2_name[:20]"/>
+                                                    <t t-esc="symbol2"/>
+                                                    <t t-esc="round(categ_data['prices2'][product.id][data['quantities'][0]],2)"/>
+                                                </span>
+                                            </div>
+                                        </t>
+                                        <t t-if="not test['form']['pricelist_id'] and not test['form']['pricelist2_id']">
+                                            <div class="card-footer"
+                                                 style="padding:0px;font-size: 15px;font-weight:bold;background:#94bade;text-align:center;">
+                                                <span>On request or contact us</span>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <t t-if="test['form']['barcode_print'] and product.barcode">
+                                        <div class="row" align="center"
+                                             style="padding-top:10px;margin: 0px !important;">
+                                            <img alt="Barcode" t-if="len(product.barcode) == 13"
+                                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', quote_plus(product.barcode or ''), 220, 30)"/>
+                                            <img alt="Barcode" t-elif="len(product.barcode) == 8"
+                                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', quote_plus(product.barcode or ''), 220, 30)"/>
+                                            <img alt="Barcode" t-else=""
+                                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', quote_plus(product.barcode or ''), 220, 30)"/>
+                                            <span t-field="product.barcode" style="font-size:14px;"/>
+                                        </div>
+                                    </t>
+                                </td>
+                                <td style="margin-left:0px;padding-left:0px;width:70%">
+                                    <div class="card" t-if="test['form']['barcode_print']" style="padding:0px;height:19.4rem;margin:0px;">
+                                        <div class="card-header" t-field="product.name"
+                                             style="padding:0px 0px 0px 5px;font-size: 17px;background:#94bade;font-weight:bold;"/>
+                                        <div class="card-body" style="padding:0px 0px 0px 5px; background:#e4e3e3 !important;overflow:hidden;">
+                                            <strong t-if="test['form']['available_quantity']" style="font-size: 13px;">
+                                                Available Quantity :
+                                                <t t-if="product.qty_available &lt;= 0.0">
+                                                    <span class="badge" style="background: red;color: #FFFFFF;font-size: 0.750rem;">Out of stock</span>
+                                                </t>
+                                                <t t-if="product.qty_available &lt;= 5.0 and product.qty_available &gt;= 1.0">
+                                                    <span class="badge" style="background: yellow;color: black;font-size: 0.750rem;">Limited Stock</span>
+                                                </t>
+                                                <t t-if="product.qty_available &gt; 5.0">
+                                                    <span class="badge" style="background: green;color: #FFFFFF;font-size: 0.750rem;">In Stock</span>
+                                                </t>
+                                            </strong>
+                                            <br t-if="test['form']['available_quantity']"/>
+                                            <strong t-if="test['form']['incoming_quantity']" style="font-size: 13px;">
+                                                Incoming Quantity :
+                                                <span t-esc="product.incoming_qty"/>
+                                            </strong>
+                                            <br t-if="test['form']['incoming_quantity']"/>
+                                            <br/>
+                                            <span class="text-uppercase" t-field="product.description_sale"
+                                                  style="font-size: 15px;"/>
+                                        </div>
+                                        <!--                                            <div class="card-footer"/>-->
+                                    </div>
+
+                                    <div class="card" t-else="test['form']['barcode_print'] and product.barcode" style="padding:0px;height:19.4rem;margin:0px;">
+                                        <div class="card-header" t-field="product.name"
+                                             style="padding:0px 0px 0px 5px;font-size: 17px;background:#94bade;font-weight:bold;"/>
+                                        <div class="card-body"
+                                             style="padding:0px 0px 0px 5px;background:#e4e3e3 !important;overflow:hidden;">
+                                            <strong t-if="test['form']['available_quantity']">
+                                                Available Quantity :
+                                                <t t-if="product.qty_available &lt;= 0.0">
+                                                    <span class="badge" style="background: red;color: #FFFFFF;font-size: 0.750rem;">Out of stock</span>
+                                                </t>
+                                                <t t-if="product.qty_available &lt;= 5.0 and product.qty_available &gt;= 1.0">
+                                                    <span class="badge" style="background: yellow;color: black;font-size: 0.750rem;">Limited Stock</span>
+                                                </t>
+                                                <t t-if="product.qty_available &gt; 5.0">
+                                                    <span class="badge" style="background: green;color: #FFFFFF;font-size: 0.750rem;">In Stock</span>
+                                                </t>
+                                            </strong>
+                                            <br t-if="test['form']['available_quantity']"/>
+                                            <strong t-if="test['form']['incoming_quantity']">
+                                                Incoming Quantity :
+                                                <span t-esc="product.incoming_qty"/>
+                                            </strong>
+                                            <br t-if="test['form']['incoming_quantity']"/>
+                                            <br/>
+                                            <span class="text-uppercase" t-field="product.description_sale"
+                                                  style="font-size: 15px;"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!--                            </table>-->
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+    <template id="catalog_pricelist_report.catalog_report">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page" style="padding-top:0px;">
+                    <t t-if="test['form']['header']">
+                        <t t-call="catalog_pricelist_report.catalog_external_layout"/>
+                        <t t-call="catalog_pricelist_report.catalog_main_report"/>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_catalog_report" model="ir.actions.report">
+        <field name="name">Product Catalog</field>
+        <field name="model">product.product</field>
+        <field name="report_name">catalog_pricelist_report.catalog_report</field>
+        <field name="binding_model_id" eval="False"/>
+        <field name="paperformat_id" ref="catalog_pricelist_report_extended.paperformat_catalog_report_ts"/>
+    </record>
+
+</odoo>

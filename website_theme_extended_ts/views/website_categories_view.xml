@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="categories_recursive" inherit_id="website_sale.categories_recursive" name="Category list Modification">
+        <xpath expr="//ul[@t-if='c.child_id']" position="replace">
+            <li t-if="c.child_id" class="nav nav-pills flex-column nav-hierarchy">
+                <t t-foreach="c.child_id" t-as="c">
+                    <t t-if="not search or c.id in search_categories_ids">
+                        <t t-call="website_sale.categories_recursive" />
+                    </t>
+                </t>
+            </li>
+        </xpath>
+    </template>
+</odoo>

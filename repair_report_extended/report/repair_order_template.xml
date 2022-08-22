@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_repair_order">
+            <t t-call="web.report_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                    <t t-set="style" t-value="res_company.df_style or user.env.ref('professional_templates.df_style_for_all_reports')"/>
+                    <t t-if="style.template_repair.key == 'repair_report_extended.repair_1_document'" t-call="repair_report_extended.repair_1_document"
+                       t-lang="doc.partner_id.lang"/>
+                    <t t-if="style.template_repair.key == 'repair_report_extended.repair_2_document'" t-call="repair_report_extended.repair_2_document" t-lang="doc.partner_id.lang"/>
+                    <t t-if="not style" t-call="repair.report_repairorder" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="digest_custom_mail_template_ts" name="Digest: Custom Main Template" inherit_id="digest.digest_mail_main">
+        <xpath expr="//t[@t-set='kpi_color']" position="after">
+            <t t-set="sales_person_detail" t-value="object.get_salesperson_detail_with_duration()"/>
+        </xpath>
+        <xpath expr="//div[@t-if='kpi_data']//div[1]//div[1]//div[2]" position="replace">
+            <div t-if="kpi_info.get('kpi_col1')" class="kpi_cell kpi_cell_border">
+                <div t-if="kpi_info['kpi_name'] in ['kpi_ecommerce_trending_product','kpi_pos_trending_product','kpi_sale_trending_product','kpi_salesperson_detail']"
+                     t-call="digest_extended.digest_table_kpi">
+                    <t t-set="kpi_name" t-value="kpi_info['kpi_name']"/>
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col1']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col1'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col1']['col_subtitle']"/>
+                    <t t-set="sales_person_detail_dict" t-value="sales_person_detail"/>
+                </div>
+                <div t-else="" t-call="digest.digest_tool_kpi">
+                    <!--                <div t-call="digest.digest_tool_kpi">-->
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col1']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col1'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col1']['col_subtitle']"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-if='kpi_data']//div[1]//div[1]//div[3]" position="replace">
+            <div t-if="kpi_info.get('kpi_col2')" class="kpi_cell kpi_cell_center">
+                <div t-if="kpi_info['kpi_name'] in ['kpi_ecommerce_trending_product','kpi_pos_trending_product','kpi_sale_trending_product', 'kpi_salesperson_detail']"
+                     t-call="digest_extended.digest_table_kpi">
+                    <t t-set="kpi_name" t-value="kpi_info['kpi_name']"/>
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col2']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col2'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col2']['col_subtitle']"/>
+                    <t t-set="sales_person_detail_dict" t-value="sales_person_detail"/>
+                </div>
+                <div t-else="" t-call="digest.digest_tool_kpi">
+                    <!--                <div t-call="digest.digest_tool_kpi">-->
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col2']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col2'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col2']['col_subtitle']"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@t-if='kpi_data']//div[1]//div[1]//div[4]" position="replace">
+            <div t-if="kpi_info.get('kpi_col3')" class="kpi_cell kpi_cell_border">
+                <div t-if="kpi_info['kpi_name'] in ['kpi_ecommerce_trending_product','kpi_pos_trending_product','kpi_sale_trending_product', 'kpi_salesperson_detail']"
+                     t-call="digest_extended.digest_table_kpi">
+                    <t t-set="kpi_name" t-value="kpi_info['kpi_name']"/>
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col3']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col3'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col3']['col_subtitle']"/>
+                    <t t-set="sales_person_detail_dict" t-value="sales_person_detail"/>
+                </div>
+                <div t-else="" t-call="digest.digest_tool_kpi">
+                    <!--                <div t-call="digest.digest_tool_kpi">-->
+                    <t t-set="kpi_value" t-value="kpi_info['kpi_col3']['value']"/>
+                    <t t-set="kpi_margin" t-value="kpi_info['kpi_col3'].get('margin')"/>
+                    <t t-set="kpi_subtitle" t-value="kpi_info['kpi_col3']['col_subtitle']"/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="digest_table_kpi">
+        <table style="width: 100%; max-width: 199px; border-spacing: 0;">
+            <tr>
+                <t t-if="kpi_name in ['kpi_ecommerce_trending_product','kpi_pos_trending_product','kpi_sale_trending_product']">
+                    <td style="border-collapse: collapse; padding: 10px;">
+                        <table style="border-spacing: 1; width: 100%; max-width: 600px; border: 1px solid #56b3b5;">
+                            <t t-foreach="kpi_value" t-as="product">
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;"><t
+                                                t-out="product.name"/></span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <span t-esc="kpi_subtitle" class="kpi_value_label"/>
+                    </td>
+                </t>
+                <t t-elif="kpi_name in ['kpi_salesperson_detail']">
+                    <td style="border-collapse: collapse; padding: 10px;">
+                        <t t-foreach="kpi_value" t-as="usr">
+                            <br/>
+                            <table style="border-spacing: 1; width: 100%; max-width: 600px; border: 1px solid #56b3b5;">
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;color: black;"><t
+                                                t-out="usr.name"/></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;">Quotation Count : <t
+                                                t-out="sales_person_detail_dict[kpi_subtitle][usr.id]['digest_no_of_quotation']"/></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;">invoice Count : <t
+                                                t-out="sales_person_detail_dict[kpi_subtitle][usr.id]['digest_no_of_invoice']"/></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;">Total Sale : <t
+                                                t-out="sales_person_detail_dict[kpi_subtitle][usr.id]['digest_quotation_total']"/></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-collapse: collapse; margin: 0; padding: 2px; display: block; border-top: 2px solid #56b3b5;">
+                                        <span style="font-size: 12px; font-weight: bold; text-decoration: none;">Invoice Total : <t
+                                                t-out="sales_person_detail_dict[kpi_subtitle][usr.id]['digest_invoice_total']"/></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </t>
+                        <span t-esc="kpi_subtitle" class="kpi_value_label"/>
+                    </td>
+                </t>
+            </tr>
+        </table>
+    </template>
+</odoo>

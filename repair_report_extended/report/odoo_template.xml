@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+        <template id="repair_2_document" name="Odoo Template">
+            <t t-set="doc" t-value="doc.sudo()"/>
+            <t t-call="repair.report_repairorder" t-lang="doc.partner_id.lang"/>
+        </template>
+    </data>
+</odoo>

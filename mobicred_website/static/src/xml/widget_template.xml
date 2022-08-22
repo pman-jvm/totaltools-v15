@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="mobicred_website.EMIDetails">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+              <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Can I buy this on credit?</h4>
+                </div>
+                    <div class="modal-body">
+                  <p>Yes. Apply for an <b>instant Nedbank Personal Loan</b> and you can repay the full amount in monthly instalments.<br/>
+                      <br/>
+                      The instalment amount shown is based on 24 monthly repayments (including interest charged at <b>17.25%* per year</b> and Nedbank’s initiation fee, monthly service fee
+                      and insurance premium).<br/>
+                      <br/>
+                      <b>Don't have a Nedbank account? No problem!</b><br/>
+                      You can still apply for a Nedbank Personal Loan during checkout and get an instant decision.</p>
+                        <div style="border:solid 1px;"/><br/>
+                        <p>
+                            Revolving credit is also available from <b>Mobicred at <t t-esc="widget.mobicred_isntallment"/> / month based on 12 monthly repayments</b> (including interest
+                            charged at <b>17.5%* per year</b> and excluding Mobicred's setup and service fees). <a href="https://www.mobicred.co.za/register/?merchantID=1575">Apply to Mobicred now</a>
+                        </p><br/>
+                        <p>* Annual interest subject to change</p>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+        </div>
+    </t>
+</templates>

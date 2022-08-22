@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_share_whatsapp" inherit_id="website.s_share" name="Whatsapp Share">
+        <xpath expr="//div[last()]" position="inside">
+            <!--            <span onclick="(function () { window.open('https://api.whatsapp.com/send?text='+window.encodeURIComponent(window.location.href), '_blank');})()"-->
+            <!--                  t-attf-class="s_share_whatsapp #{_link_classes}" target="_blank">-->
+            <!--                &lt;!&ndash;                <i t-attf-class="fa fa-1x fa-whatsapp #{not _link_classes and 'rounded shadow-sm'}" style="color:#4ACD57"/>&ndash;&gt;-->
+            <!--                <i t-attf-class="fa fa-whatsapp #{not _link_classes and 'rounded shadow-sm'}"/>-->
+            <!--            </span>-->
+            <a onclick="(function () { window.open('https://api.whatsapp.com/send?text='+window.encodeURIComponent(window.location.href), '_blank');})()"
+               t-attf-class="s_share_whatsapp #{_link_classes}" target="_blank">
+                <i t-attf-class="fa fa-whatsapp #{not _link_classes and 'rounded shadow-sm'}"/>
+            </a>
+        </xpath>
+    </template>
+</odoo>
+

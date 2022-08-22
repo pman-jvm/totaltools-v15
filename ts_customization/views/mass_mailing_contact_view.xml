@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_mail_mass_mailing_contact_tree" model="ir.ui.view">
+            <field name="name">mailing.contact.tree</field>
+            <field name="model">mailing.contact</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="opt_out" position="before">
+                    <field name="phone"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_mail_mass_mailing_contact_mail_form" model="ir.ui.view">
+            <field name="name">mailing.contact.form</field>
+            <field name="model">mailing.contact</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form"/>
+            <field name="arch" type="xml">
+                <field name="country_id" position="before">
+                    <field name="phone"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="94" viewBox="0 0 130 94">
+  <style>
+    @keyframes bounceInTick {
+      from,
+      20%,
+      40%,
+      60%,
+      80%,
+      to {
+        animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+      }
+
+      0% {
+        transform: scale(.3, .3) translate(38px, 24px);
+      }
+
+      20% {
+        transform: scale(1.1, 1.1) translate(38px, 24px);
+      }
+
+      40% {
+        transform: scale(.9, .9) translate(38px, 24px);
+      }
+
+      60% {
+        transform: scale(1.03, 1.03) translate(38px, 24px);
+      }
+
+      80% {
+        transform: scale(.97, .97) translate(38px, 24px);
+      }
+
+      to {
+        transform: scale(1, 1) translate(38px, 24px);
+      }
+    }
+
+    .circle-tick {
+      animation-delay: 600ms;
+      animation-name: bounceInTick;
+      animation-duration: 1000ms;
+      transform-origin: 50% 50%;
+    }
+  </style>
+
+  <g fill="none" fill-rule="evenodd">
+    <ellipse cx="65" cy="89.5" fill="#000" opacity=".1" rx="65" ry="4.5"/>
+    <path fill="#C8A281" d="M16 4h98v86H16z"/>
+    <path fill="#000" d="M16 4h98v24H16z" opacity=".2"/>
+    <path fill="#C8A281" d="M12 0h106v20H12z"/>
+    <path fill="#FFF" d="M53 0h24v49H53z" opacity=".2"/>
+    <g transform="translate(38 24)" class="circle-tick">
+      <circle cx="27" cy="27" r="27" fill="#FFF"/>
+      <path stroke="#6BD82E" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M17 28l6 6 14-14"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherited Product Form -->
+    
+    <record id="view_product_form_inherit" model="ir.ui.view">
+        <field name="name">view.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lst_price']" position="after">
+                <field name="vat_price" invisible="1" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

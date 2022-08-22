@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_product_template_form_inherited_ts" model="ir.ui.view">
+        <field name="name">product.template.form.inherited.ts</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="wk_product_dimensions.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='height']" position="after">
+                <field name="depth"/>
+            </xpath>
+            <xpath expr="//group[@name='wk_product_dimension']" position="after">
+                <group name="ts_extra_info" string="Other Info">
+                    <group>
+                        <field name="country_origin_id"/>
+                        <field name="catalogue_page"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

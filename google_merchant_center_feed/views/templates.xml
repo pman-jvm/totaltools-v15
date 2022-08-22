@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="gmc_feed_template" name="Google Merchant Feeds">
+            <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+                <channel>
+                    <title t-if="title" t-esc="title"/>
+                    <link t-if="link" t-esc="link"/>
+                    <description t-if="description" t-esc="description"/>
+                    <t t-foreach="items" t-as="item">
+                        <item>
+                            <g:id t-if="item['offerId']" t-esc="item['offerId']"/>
+                            <g:title t-if="item['title']" t-esc="item['title']"/>
+                            <g:description t-if="item['description']" t-esc="item['description']"/>
+                            <g:link t-if="item['link']" t-esc="item['link']"/>
+                            <g:image_link t-if="item['imageLink']" t-esc="item['imageLink']"/>
+                            <g:condition t-if="item['condition']" t-esc="item['condition']"/>
+                            <g:availability t-if="item['availability']" t-esc="item['availability']"/>
+                            <g:price t-if="item['price_with_currency']" t-esc="item['price_with_currency']"/>
+                            <g:shipping>
+                                <g:country t-if="item['shipping']['country']" t-esc="item['shipping']['country']"/>
+                                <g:service t-if="item['shipping']['service']" t-esc="item['shipping']['service']"/>
+                                <g:price t-if="item['shipping']['price_with_currency']" t-esc="item['shipping']['price_with_currency']"/>
+                            </g:shipping>
+                            <g:gtin t-if="item.get('gtin')" t-esc="item['gtin']"/>
+                            <g:brand t-if="item['brand']" t-esc="item['brand']"/>
+                            <g:mpn t-if="item.get('mpn')" t-esc="item['mpn']"/>
+                            <g:google_product_category t-if="item['googleProductCategory']" t-esc="item['googleProductCategory']"/>
+                            <g:product_type t-if="item['productType']" t-esc="item['productType']"/>
+                        </item>
+                    </t>
+                </channel>
+            </rss>
+        </template>
+    </data>
+</odoo>

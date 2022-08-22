@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="digest.digest_digest_default" model="digest.digest">
+            <field name="kpi_takealot_capetown">True</field>
+            <field name="kpi_takealot_johannesburg">True</field>
+            <field name="kpi_takealot_capetown_count">True</field>
+            <field name="kpi_takealot_johannesburg_count">True</field>
+        </record>
+    </data>
+</odoo>

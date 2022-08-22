@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="product_add_cart_custom" inherit_id="website_sale.product" name="product_add_card_custom"
+              priority="15">
+        <xpath expr="//div[@id='product_details']/h1[last()]" position="after">
+            <t t-if="product_variant.default_code">
+                <h6 class="default-code x_variant_default_code">SKU <t t-esc="product_variant.default_code"/></h6>
+            </t>
+            <div id="show_qty_message_inventory_adjustment" style="display:none;">
+                <h6>Stock taking process is in progress.</h6>
+            </div>
+        </xpath>
+    </template>
+</odoo>

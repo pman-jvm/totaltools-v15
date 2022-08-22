@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_template_form_product_pack" model="ir.ui.view">
+        <field name="name">product.template.form.product.pack</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_po_id']" position="after">
+                <field name="pack_size_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="model_product_template_action_publish" model="ir.actions.server">
+        <field name="name">Publish</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_publish_products()</field>
+    </record>
+
+    <record id="model_product_template_action_unpublish" model="ir.actions.server">
+        <field name="name">UnPublish</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_unpublish_products()</field>
+    </record>
+</odoo>

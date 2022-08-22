@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="company_description" inherit_id="website.contactus" name="Company Phone">
+        <xpath expr="//ul[hasclass('list-unstyled')]" position="replace">
+            <div t-field="res_company.partner_id" t-options='{"widget": "contact","fields": ["name", "address", "phone"]}'/>
+            <div t-if="res_company.phone2">
+                <i class="fa fa-phone fa-fw"/>
+                <span t-field="res_company.phone2"/>
+            </div>
+            <div t-if="res_company.phone3">
+                <i class="fa fa-phone fa-fw"/>
+                <span t-field="res_company.phone3"/>
+            </div>
+            <div t-field="res_company.partner_id" t-options='{"widget": "contact","fields": ["mobile", "email"]}'/>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="customer_statement" name="Customer Statement" inherit_id="account_reports.filter_info_template">
+        <xpath expr="//div[hasclass('print_only')]//div[hasclass('col-4')]//div[5]//t" position="replace">
+            <t t-if="options.get('partner_ids') != None">
+                Customer:
+                <t t-set="res_partner_value" t-value="'All'"/>
+                <t t-foreach="options['selected_partner_ids']" t-as="partner_name">
+                    <t t-set="res_partner_value" t-value="''"/>
+                    <t t-esc="partner_name"/>
+                </t>
+                <t t-esc="res_partner_value"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

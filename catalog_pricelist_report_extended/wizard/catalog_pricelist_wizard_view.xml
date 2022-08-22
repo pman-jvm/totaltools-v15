@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="catalog_pricelist_wizard_form_view" model="ir.ui.view">
+        <field name="name">catalog.pricelist.wizard.form.view.ts</field>
+        <field name="model">catalog.pricelist.report.wizard</field>
+        <field name="inherit_id" ref="catalog_pricelist_report.catalog_pricelist_wizard_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_2']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='qty_3']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='include_tax']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='print_attributes']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='barcode_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='barcode_height']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='barcode_width']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='header']" position="after">
+                <field name="header_address" attrs="{'invisible':[('header','=',False)]}"/>
+            </xpath>
+
+            <xpath expr="//page[2]/group[1]" position="inside">
+                <field name="print_footer_images"/>
+            </xpath>
+            <xpath expr="//page[2]/group[2]" position="inside">
+                <group>
+                    <field name="footer_image" widget="image" attrs="{'invisible': [('print_footer_images','=',False)]}"
+                           nolabel="1"
+                           img_width="150" img_height="200" width="150" height="300"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='pricelist_id']" position="after">
+                <field name="pricelist2_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

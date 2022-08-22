@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="website_sale_stock.product_availability">
+        <t t-jquery="t:first" t-operation="replace">
+        </t>
+    </t>
+
+</templates>

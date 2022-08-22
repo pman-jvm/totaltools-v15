@@ -1,0 +1,10 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<odoo>
+    <template id="product_mobicred_website_1" name='product mobicred website' inherit_id="website_sale.product_price" priority="8">
+        <xpath expr="//div[hasclass('product_price')]" position="after">
+            <div id="instalmentCalc" t-att-data-amount="combination_info['price']" data-logo="0"/>
+            <a role="button" class="js_mobicred_info fa fa-info-circle" style="margin-right:5px; color: #adadad;" aria-label="Info" title="" data-toggle="tooltip"
+               data-original-title="Info"/>
+        </xpath>
+    </template>
+</odoo>

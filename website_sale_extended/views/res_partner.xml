@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_unit_complex_view_form" model="ir.ui.view">
+        <field name="name">res.partner.unit.complex.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='street2']" position='after'>
+                <div>
+                    <field name="unit_number" placeholder="Unit Number"/>
+                </div>
+                <div>
+                    <field name="complex_name" placeholder="Complex Name"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="website_description_link_form" model="ir.ui.view">
+            <field name="name">website.product.templete</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="website_description" string="Website description">
+                        <field name="website_description"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="website_description_product_variant_view" model="ir.ui.view">
+            <field name="name">website.product.product</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="website_description" string="Website description">
+                        <field name="website_description"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

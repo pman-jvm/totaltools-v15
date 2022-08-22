@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="website_sale_extended.ProductImagePreview">
+        <div class="modal fade" id="TsProductView" tabindex="-1" role="dialog" aria-labelledby="TsProductView" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content" style="background: transparent;border: 0px;">
+                <div class="modal-body" style="text-align: center; overflow: hidden;">
+                    <img class="img img-fluid product_detail_img mh-100" t-att-src="url"/>
+                </div>
+            </div>
+          </div>
+        </div>
+    </t>
+</templates>

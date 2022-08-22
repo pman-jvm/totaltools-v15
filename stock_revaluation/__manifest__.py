@@ -1,0 +1,23 @@
+{
+    'name': "Stock Revaluation",
+    'summary': 'Application helps users to adjust or revaluation of existing stocks.',
+    'version': "15.0",
+    'category': 'Hidden',
+    'depends': ['stock_account'],
+    'images': [],
+    'demo': [],
+    'qweb': [],
+    'data': [
+        'security/ir.model.access.csv',
+        'wizard/stock_valuation_layer_revaluation_views.xml',
+        'views/stock_valuation_layer_views.xml',
+    ],
+    'author': "TeqStars",
+    'website': "https://teqstars.com",
+    'support': 'support@teqstars.com',
+    'maintainer': 'TeqStars',
+    'license': 'OPL-1',
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

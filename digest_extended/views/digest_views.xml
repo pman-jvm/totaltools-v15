@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="digest_digest_view_form" model="ir.ui.view">
+        <field name="name">digest.digest.view.form.inherit.odoo.store</field>
+        <field name="model">digest.digest</field>
+        <field name="inherit_id" ref="digest.digest_digest_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='kpi_sales']" position="after">
+                <group name="kpi_takealot" string="Takealot" groups="sales_team.group_sale_salesman_all_leads">
+                    <field name="kpi_takealot_capetown"/>
+                    <field name="kpi_takealot_johannesburg"/>
+                    <field name="kpi_takealot_capetown_count"/>
+                    <field name="kpi_takealot_johannesburg_count"/>
+                </group>
+                <group name="kpi_trending_product" string="Trending Product">
+                    <field name="kpi_sale_trending_product"/>
+                    <field name="kpi_pos_trending_product"/>
+                    <field name="kpi_ecommerce_trending_product"/>
+                </group>
+                <group name="kpi_salesperson_detail_group" string="Salesperson Detail">
+                    <field name="kpi_salesperson_detail"/>
+                    <field name="kpi_salesperson_detail_value" attrs="{'invisible':[('kpi_salesperson_detail','=',False)]}" widget="many2many_tags"
+                           options="{'no_create': True,'no_open': True, 'no_create_edit': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
