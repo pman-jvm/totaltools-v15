@@ -63,7 +63,7 @@ class MerchantCetnerCategory(models.Model):
 
     name = fields.Char(size=256, string='Category Name', required=True)
     parent_id = fields.Many2one('merchant.center.category', string='Parent Category', index=True)
-    complete_name = fields.Char('Name', compute="_compute_complete_name" ,readonly=True)
+    complete_name = fields.Char('Name', compute="_compute_complete_name" ,readonly=True, recursive=True)
     product_count = fields.Integer(
         '# Products', compute='_compute_product_count',
         help="The number of products under this category (Does not consider the children categories)")
