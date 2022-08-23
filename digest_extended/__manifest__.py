@@ -9,7 +9,7 @@
     'data': [
         'data/digest_data.xml',
         'views/digest_views.xml',
-        'views/digest_template.xml',
+        # 'views/digest_template.xml',
 
     ],
 
